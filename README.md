@@ -47,14 +47,14 @@ jobs:
   publish:
     - uses: actions/checkout@v2
     # publish to a branch in current repo using GITHUB_TOKEN and other default settings
-    - uses: oleksiyrudenko/gha-git-credentials@master
+    - uses: oleksiyrudenko/gha-git-credentials@v1
       with:
         token: '${{ secrets.GITHUB_TOKEN }}'
     - run: |
         yarn run build
         yarn run deploy
     # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@master
+    - uses: oleksiyrudenko/gha-git-credentials@v1
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
