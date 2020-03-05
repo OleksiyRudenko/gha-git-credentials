@@ -16,9 +16,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: './'
-      - uses: actions/cache@v1
+      - name: Clean npm cache directory
+        run: npm cache clear --force
+      - name: Detect npm cache location
+        id: npm-cache
+        run: echo "::set-output name=dir::$(npm config get cache)"
+      - name: Set up workflow caching of npm cache
+        uses: actions/cache@v1
         with:
-          path: ~/.npm
+          path: ${{ steps.npm-cache.outputs.dir }}
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-cache-
