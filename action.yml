@@ -1,0 +1,26 @@
+---
+name: 'Configure git credentials'
+description: 'Set git credentials for commits and operations with remotes'
+author: 'OleksiyRudenko'
+branding:
+  icon: 'log-in'
+  color: 'blue'
+inputs:
+  email:
+    description: '<git-user-email@domain.com> (default: github-action@users.noreply.github.com)'
+    required: false
+    default: 'github-action@users.noreply.github.com'
+  name:
+    description: 'Git User Name (default: "GitHub Action")'
+    required: false
+    default: 'GitHub Action'
+  actor:
+    description: 'GitHub Actor Username (default: github.actor)'
+    required: false
+    default: ''
+  token:
+    description: 'GitHub Token (default: secrets.GITHUB_TOKEN)'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

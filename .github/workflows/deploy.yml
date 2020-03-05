@@ -1,0 +1,38 @@
+name: Build script and update dist on script sources update on master
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'action.sh'
+      - 'action.yml'
+      - 'index.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull source code
+        uses: actions/checkout@v2
+        with:
+          path: './'
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Setup git creds
+        uses: oleksiyrudenko/gha-git-credentials@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit update
+        run: |
+          git commit -m "Update dist/*" -a
+      - name: Publish changes
+        run: |
+          git push

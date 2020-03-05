@@ -1,0 +1,29 @@
+{
+  "name": "gha-git-credentials",
+  "version": "1.0.0",
+  "description": "A GitHub action for setting up git credentials",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build index.js -o dist && cp ./action.sh dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OleksiyRudenko/gha-git-credentials.git"
+  },
+  "keywords": [
+    "GitHub",
+    "action",
+    "git",
+    "credentials"
+  ],
+  "author": "Oleksiy Rudenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OleksiyRudenko/gha-git-credentials/issues"
+  },
+  "homepage": "https://github.com/OleksiyRudenko/gha-git-credentials#readme",
+  "devDependencies": {
+    "@zeit/ncc": "0.21.1"
+  }
+}
