@@ -5,7 +5,8 @@ git credentials.
 
 This project deployment workflow uses this action.
 
-This can be useful when workflow provides for creating commits
+[This action](https://github.com/marketplace/actions/configure-git-credentials)
+can be useful when workflow provides for creating commits
 (e.g. when publishing content) and/or pushing commits to remote repos.
 
 Default values would work for the most cases.
@@ -30,7 +31,7 @@ Actor would also be overridden when pushing to a repo cloud other than GitHub.
 | ---           | ---        | ---           | ---         |
 | `name`        | string     | `GitHub Action` | value for git config user.name |
 | `email`       | string     | `github-action@users.noreply.github.com` | value for git config user.email |
-| `global`      | boolean    | false         | global git config configured when true |
+| `global`      | boolean    | false         | global git config is configured when set to true |
 | `actor`       | string     | **github.actor** | value used to construct GIT_USER |
 | `token`       | string     |               | **required** value for git config user.password and GIT_USER |
 
@@ -49,24 +50,32 @@ on:
 jobs:
   publish:
     - uses: actions/checkout@v2
-    # publish to a branch in current repo using GITHUB_TOKEN and other default settings
-    - uses: oleksiyrudenko/gha-git-credentials@v1
+    # Publish to a branch in current repo using GITHUB_TOKEN and other default settings.
+    - uses: oleksiyrudenko/gha-git-credentials@v2
       with:
         token: '${{ secrets.GITHUB_TOKEN }}'
     - run: |
         yarn run build
         yarn run deploy
-    # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v1
+    # Publish to a branch in different repo on a different repo cloud
+    # using a PAT generated on that other repo.
+    # Option `actor` is set to a username on that different repo cloud.
+    # Option `global` is set to true as deployment script may create a temporary local repo
+    # for a build.
+    - uses: oleksiyrudenko/gha-git-credentials@v2
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
         actor: 'OleksiyRudenko'
-        token: '${{ secrets.GH_PAT_WEB_CENTRAL }}'
+        global: true
+        token: '${{ secrets.GL_PAT_WEB_CENTRAL }}'
     - run: |
-        git remote add web-central https://github.com/some-organization/website.git
+        git remote add web-central https://gitlab.com/some-organization/website.git
         yarn run deploy web-central/master
 ```
+
+You may want to set `global` option true when publishing from multiple
+local repositories.
 
 ## License
 
