@@ -14,6 +14,10 @@ inputs:
     description: 'Git User Name (default: "GitHub Action")'
     required: false
     default: 'GitHub Action'
+  global:
+    description: 'Git User Name (default: "GitHub Action")'
+    required: false
+    default: 'false'
   actor:
     description: 'GitHub Actor Username (default: github.actor)'
     required: false
