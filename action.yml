@@ -6,6 +6,10 @@ branding:
   icon: 'log-in'
   color: 'blue'
 inputs:
+  global:
+    description: 'Configure global git user name, email, password (default: false)'
+    required: false
+    default: 'false'
   email:
     description: '<git-user-email@domain.com> (default: github-action@users.noreply.github.com)'
     required: false
@@ -17,9 +21,9 @@ inputs:
   actor:
     description: 'GitHub Actor Username (default: github.actor)'
     required: false
-    default: ''
+    default: GITHUB_ACTOR
   token:
-    description: 'GitHub Token (default: secrets.GITHUB_TOKEN)'
+    description: 'GitHub Token'
     required: true
 runs:
   using: 'node12'

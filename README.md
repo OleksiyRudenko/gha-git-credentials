@@ -3,10 +3,9 @@
 [GitHub Action](https://github.com/features/actions) for setting up
 git credentials.
 
-This project deployment workflow uses this action to build its own distribution package.
-
-This can be useful when workflow provides for creating commits
+This action can be useful when workflow provides for creating commits
 (e.g. when publishing content) and/or pushing commits to remote repos.
+[Action on the marketplace](https://github.com/marketplace/actions/configure-git-credentials).
 
 Default values would work for the most cases.
 However **token** parameter must be passed to the action explicitly.
@@ -24,6 +23,8 @@ You may also want to override default git user name and email.
 
 Actor would also be overridden when pushing to a repo cloud other than GitHub.
 
+This project deployment workflow uses very this action to build its own distribution package.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
@@ -33,6 +34,7 @@ Actor would also be overridden when pushing to a repo cloud other than GitHub.
 - [Usage Example](#usage-example)
 - [Versions](#versions)
   - [What version to use?](#what-version-to-use)
+  - [v2.1.0](#v210)
   - [v2](#v2)
   - [v1](#v1)
 - [License](#license)
@@ -43,10 +45,22 @@ Actor would also be overridden when pushing to a repo cloud other than GitHub.
 
 ## Inputs
 
-- `name`: value for git config user.name (default: `GitHub Action`)
-- `email`: value for git config user.email (default: `github-action@users.noreply.github.com`)
-- `actor`: value used to construct GIT_USER (default: **github.actor**)
-- `token`: value for git config user.password and GIT_USER
+| property name | value type | default value | description |
+| ---           | ---        | ---           | ---         |
+| `global`      | boolean    | false         | global git config used to assign git user name, email and password when true |
+| `name`        | string     | `GitHub Action` | value for git config user.name |
+| `email`       | string     | `github-action@users.noreply.github.com` | value for git config user.email |
+| `actor`       | string     | github.actor  | value used to construct GIT_USER |
+| `token`       | string     | **n/a**       | **required** value for git user.password and GIT_USER |
+
+The minimally required action configuration requires a token being explicitly specified.
+Example below uses secrets.GITHUB_TOKEN available to the workflow as a token source.
+
+```
+- uses: oleksiyrudenko/gha-git-credentials@v2-latest
+  with:
+    token: '${{ secrets.GITHUB_TOKEN }}'
+```
 
 ## Outputs
 
@@ -63,24 +77,36 @@ on:
 jobs:
   publish:
     - uses: actions/checkout@v2
-    # publish to a branch in current repo using GITHUB_TOKEN and other default settings
+    # Publish to a branch in current repo using GITHUB_TOKEN and other default settings.
     - uses: oleksiyrudenko/gha-git-credentials@v2-latest
       with:
         token: '${{ secrets.GITHUB_TOKEN }}'
     - run: |
         yarn run build
         yarn run deploy
-    # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+    # Publish to a branch in a different repo
+    # using a PAT generated on that other repo.
+    # Option `global` is set to true as the deployment script may create 
+    # a temporary local repo for a build and we want it to reuse git user settings.
+    # Option `actor` is assigned as per that different repo cloud user.
+    - uses: oleksiyrudenko/gha-git-credentials@v2.1
       with:
+        global: true
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
         actor: 'OleksiyRudenko'
-        token: '${{ secrets.GH_PAT_WEB_CENTRAL }}'
+        token: '${{ secrets.GL_PAT_WEB_CENTRAL }}'
     - run: |
-        git remote add web-central https://github.com/some-organization/website.git
+        git remote add web-central https://gitlab.com/some-organization/website.git
         yarn run deploy web-central/master
 ```
+
+You may want to set the `global` option true when committing
+to multiple local repositories during the workflow run is anticipated.
+
+> Note that the second use of `gha-git-credentials` refers to a specific
+> version of the action (`@v2.1`). In fact `@v2-latest` would work here quite fine
+> and is a better approach.
 
 Check [What version to use?](#what-version-to-use) to choose proper
 action version reference.
@@ -101,13 +127,18 @@ So, in this action the options are:
 - `<branch-name>` - version as per given branch name, useful for testing 
 
 Whenever non-breaking changes introduced, having backward compatibility secured,
-a patch version is released and relevant `vX-latest` tag is moved to point
+a patch version is released and the relevant `vX-latest` tag is moved to point
 at the latest release within current major version.
 
 Using `vX-latest` is a recommended choice.
 
 Below are key features of the releases.
 Check [CHANGELOG](./CHANGELOG.md) for details. 
+
+### v2.1.0
+
+Introduce `global` option to configure global git user name, email and password.
+Default is `false` for backward compatibility.
 
 ### v2
 Changed the way `GIT_USER` env var is being assigned.
@@ -117,8 +148,8 @@ Reason:
 
 ### v1
 Features:
-- Configurable user name and user email for commits created by a custom action
-- Configurable actor and token (GIT_USER) to push updates from a custom action
+- Configurable git user name, email and password for commits created in a course of the workflow
+- Configurable actor and token (GIT_USER) to push updates from a workflow
 
 ## License
 
