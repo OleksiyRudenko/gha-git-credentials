@@ -1,0 +1,6 @@
+# Site settings
+title: Git Credentials
+description: A GitHub Action for setting up git credentials
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-slate
