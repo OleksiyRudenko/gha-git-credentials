@@ -62,7 +62,7 @@ jobs:
     # Option `actor` is set to a username on that different repo cloud.
     # Option `global` is set to true as deployment script may create a temporary local repo
     # for a build.
-    - uses: oleksiyrudenko/gha-git-credentials@v2
+    - uses: oleksiyrudenko/gha-git-credentials@v3
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'

@@ -1,6 +1,6 @@
 {
   "name": "gha-git-credentials",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "A GitHub action for setting up git credentials",
   "main": "index.js",
   "scripts": {
