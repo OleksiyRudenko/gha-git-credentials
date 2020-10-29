@@ -54,7 +54,7 @@ jobs:
         yarn run build
         yarn run deploy
     # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v1
+    - uses: oleksiyrudenko/gha-git-credentials@v2
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
