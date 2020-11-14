@@ -64,7 +64,7 @@ jobs:
   publish:
     - uses: actions/checkout@v2
     # publish to a branch in current repo using GITHUB_TOKEN and other default settings
-    - uses: oleksiyrudenko/gha-git-credentials@v1
+    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
       with:
         token: '${{ secrets.GITHUB_TOKEN }}'
     - run: |
