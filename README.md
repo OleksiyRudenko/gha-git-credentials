@@ -91,17 +91,16 @@ action version reference.
 
 In workflow `.yml` file you are required to specify action version.
 E.g. `uses: oleksiyrudenko/gha-git-credentials@v2`.
+`@v2` here refers to a very specific version of the action script.
 
-`@v2` refers to a very specific version of the action script.
-
-So, the options are:
+So, in this action the options are:
 - `vX`, `vX.Y` - specific version
 - `vX-latest` - latest release within the major version
   (no breaking changes, backward compatibility)
 - `latest` - latest release, major version change may occur
 - `<branch-name>` - version as per given branch name, useful for testing 
 
-Whenever non-breaking changes introduced, backward compatibility secured
+Whenever non-breaking changes introduced, having backward compatibility secured,
 a patch version is released and relevant `vX-latest` tag is moved to point
 at the latest release within current major version.
 

@@ -93,7 +93,7 @@ the either of files specified under `on` clause
 in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)
 is pushed to `master` branch on GitHub.
 
-The action creates a distribution package and commits the change in the repo.
+The action creates a distribution package, commits and pushes the change.
 
 Once this happens:
 - tag the commit with a version, following SemVer convention
