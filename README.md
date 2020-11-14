@@ -3,7 +3,7 @@
 [GitHub Action](https://github.com/features/actions) for setting up
 git credentials.
 
-This project deployment workflow uses this action.
+This project deployment workflow uses this action to build its own distribution package.
 
 This can be useful when workflow provides for creating commits
 (e.g. when publishing content) and/or pushing commits to remote repos.
@@ -32,6 +32,7 @@ Actor would also be overridden when pushing to a repo cloud other than GitHub.
 - [Outputs](#outputs)
 - [Usage Example](#usage-example)
 - [Versions](#versions)
+  - [What version to use?](#what-version-to-use)
   - [v2](#v2)
   - [v1](#v1)
 - [License](#license)
@@ -70,7 +71,7 @@ jobs:
         yarn run build
         yarn run deploy
     # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v2
+    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
@@ -81,9 +82,33 @@ jobs:
         yarn run deploy web-central/master
 ```
 
+Check [What version to use?](#what-version-to-use) to choose proper
+action version reference.
+
 ## Versions
 
-Check [CHANGELOG](./CHANGELOG.md) for details.
+### What version to use?
+
+In workflow `.yml` file you are required to specify action version.
+E.g. `uses: oleksiyrudenko/gha-git-credentials@v2`.
+
+`@v2` refers to a very specific version of the action script.
+
+So, the options are:
+- `vX`, `vX.Y` - specific version
+- `vX-latest` - latest release within the major version
+  (no breaking changes, backward compatibility)
+- `latest` - latest release, major version change may occur
+- `<branch-name>` - version as per given branch name, useful for testing 
+
+Whenever non-breaking changes introduced, backward compatibility secured
+a patch version is released and relevant `vX-latest` tag is moved to point
+at the latest release within current major version.
+
+Using `vX-latest` is a recommended choice.
+
+Below are key features of the releases.
+Check [CHANGELOG](./CHANGELOG.md) for details. 
 
 ### v2
 Changed the way `GIT_USER` env var is being assigned.
