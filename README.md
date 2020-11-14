@@ -24,6 +24,22 @@ You may also want to override default git user name and email.
 
 Actor would also be overridden when pushing to a repo cloud other than GitHub.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+- [Usage Example](#usage-example)
+- [Versions](#versions)
+  - [v2](#v2)
+  - [v1](#v1)
+- [License](#license)
+- [No affiliation with GitHub Inc.](#no-affiliation-with-github-inc)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- generated with [DocToc](https://github.com/thlorenz/doctoc) -->
+
 ## Inputs
 
 - `name`: value for git config user.name (default: `GitHub Action`)
@@ -54,7 +70,7 @@ jobs:
         yarn run build
         yarn run deploy
     # publish to a branch in different repo using a PAT generated on that other repo
-    - uses: oleksiyrudenko/gha-git-credentials@v1
+    - uses: oleksiyrudenko/gha-git-credentials@v2
       with:
         name: 'Oleksiy Rudenko'
         email: 'oleksiy.rudenko@domain.com'
@@ -64,6 +80,21 @@ jobs:
         git remote add web-central https://github.com/some-organization/website.git
         yarn run deploy web-central/master
 ```
+
+## Versions
+
+Check [CHANGELOG](./CHANGELOG.md) for details.
+
+### v2
+Changed the way `GIT_USER` env var is being assigned.
+
+Reason:
+[GitHub deprecated `add-path` and `set-env` commands](https://github.blog/changelog/2020-10-01-github-actions-deprecating-set-env-and-add-path-commands/).
+
+### v1
+Features:
+- Configurable user name and user email for commits created by a custom action
+- Configurable actor and token (GIT_USER) to push updates from a custom action
 
 ## License
 
