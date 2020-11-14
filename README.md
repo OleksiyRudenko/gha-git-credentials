@@ -65,6 +65,16 @@ jobs:
         yarn run deploy web-central/master
 ```
 
+## Versions
+
+Check [CHANGELOG](./CHANGELOG.md) for details.
+
+### v2
+Changed the way `GIT_USER` env var is being assigned.
+
+Reason:
+[GitHub deprecated `add-path` and `set-env` commands](https://github.blog/changelog/2020-10-01-github-actions-deprecating-set-env-and-add-path-commands/).
+
 ## License
 
 Scripts and documentation in this project are released under the [MIT license](LICENSE).

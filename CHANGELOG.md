@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add option to configure global git user name, email and password
 
-## [2.0.0] - 2020-10-29
+## [v2] - 2020-11-14
 ### Changed
-- Replace `set-env` command with setting env variables via $GITHUB_ENV file
+- Replace deprecated `set-env` command with setting env variables via $GITHUB_ENV file
 
-## [1.0.0] - 2017-06-20
+## [v1] - 2020-03-06
 ### Added
 - Add configurable user name and user email for commits created by a custom action
 - Add configurable actor and token to push updates from a custom action
