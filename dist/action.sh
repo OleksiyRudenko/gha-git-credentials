@@ -9,4 +9,4 @@ INPUT_TOKEN=${INPUT_TOKEN:-"${{ secrets.GITHUB_TOKEN }}"}
 git config user.email ${INPUT_EMAIL}
 git config user.name ${INPUT_NAME}
 git config user.password ${INPUT_TOKEN}
-echo "name=GIT_USER::${INPUT_ACTOR}:${INPUT_TOKEN}" >> $GITHUB_ENV
+echo "::set-env name=GIT_USER::${INPUT_ACTOR}:${INPUT_TOKEN}"
