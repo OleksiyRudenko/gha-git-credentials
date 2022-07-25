@@ -37,6 +37,7 @@ This project deployment workflow uses very this action to build its own distribu
   - [v2.1.0](#v210)
   - [v2](#v2)
   - [v1](#v1)
+- [Action Users](#action-users)
 - [License](#license)
 - [No affiliation with GitHub Inc.](#no-affiliation-with-github-inc)
 
@@ -150,6 +151,32 @@ Reason:
 Features:
 - Configurable git user name, email and password for commits created in a course of the workflow
 - Configurable actor and token (GIT_USER) to push updates from a workflow
+
+## Action Users
+
+As of July 25, 2022, [685 projects on GitHub depend on this GitHub action](https://github.com/OleksiyRudenko/gha-git-credentials/network/dependents).
+
+**15 top rated**
+
+| url                                                        |   stars |
+|------------------------------------------------------------|--------:|
+| https://github.com/yewstack/yew                            |     23K |
+| https://github.com/lingui/js-lingui                        |    3.4K |
+| https://github.com/ibis-project/ibis                       |    1.9K |
+| https://github.com/wickedest/Mergely                       |    1.0K |
+| https://github.com/CuyZ/Valinor                            |     584 |
+| https://github.com/snowplow/snowplow-javascript-tracker    |     487 |
+| https://github.com/themoonisacheese/2bored2wait            |     341 |
+| https://github.com/Lightning-AI/tutorials                  |     152 |
+| https://github.com/diegoazh/gmap-vue                       |     133 |
+| https://github.com/cookiejar/cookietemple                  |     123 |
+| https://github.com/jessedobbelaere/tailwindcss-sketch-kit  |     117 |
+| https://github.com/zeromq/pyre                             |     113 |
+| https://github.com/splunk/splunk-connect-for-syslog        |     100 |
+| https://github.com/QuiltServerTools/Ledger                 |      96 |
+| https://github.com/JustLiquidity/DEFAULT-TOKEN-LIST        |      85 |
+
+_Stats built with [ghtopdep](https://github.com/github-tooling/ghtopdep)_
 
 ## License
 
