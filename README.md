@@ -34,6 +34,7 @@ This project deployment workflow uses very this action to build its own distribu
 - [Usage Example](#usage-example)
 - [Versions](#versions)
   - [What version to use?](#what-version-to-use)
+  - [v2.1.1](#v211)
   - [v2.1.0](#v210)
   - [v2](#v2)
   - [v1](#v1)
@@ -90,7 +91,7 @@ jobs:
     # Option `global` is set to true as the deployment script may create 
     # a temporary local repo for a build and we want it to reuse git user settings.
     # Option `actor` is assigned as per that different repo cloud user.
-    - uses: oleksiyrudenko/gha-git-credentials@v2.1
+    - uses: oleksiyrudenko/gha-git-credentials@v2.1.1
       with:
         global: true
         name: 'Oleksiy Rudenko'
@@ -106,7 +107,7 @@ You may want to set the `global` option true when committing
 to multiple local repositories during the workflow run is anticipated.
 
 > Note that the second use of `gha-git-credentials` refers to a specific
-> version of the action (`@v2.1`). In fact `@v2-latest` would work here quite fine
+> version of the action (`@v2.1.1`). In fact `@v2-latest` would work here quite fine
 > and is a better approach.
 
 Check [What version to use?](#what-version-to-use) to choose proper
@@ -121,7 +122,7 @@ E.g. `uses: oleksiyrudenko/gha-git-credentials@v2`.
 `@v2` here refers to a very specific version of the action script.
 
 So, in this action the options are:
-- `vX`, `vX.Y` - specific version
+- `vX`, `vX.Y`, `vX.Y.Z` - specific version
 - `vX-latest` - latest release within the major version
   (no breaking changes, backward compatibility)
 - `latest` - latest release, major version change may occur
@@ -135,6 +136,11 @@ Using `vX-latest` is a recommended choice.
 
 Below are key features of the releases.
 Check [CHANGELOG](./CHANGELOG.md) for details. 
+
+### v2.1.1
+
+Configure action to use NodeJS v16 instead of v12.
+[Reason](https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/).
 
 ### v2.1.0
 

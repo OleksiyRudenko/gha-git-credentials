@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 No changes planned
 
+## [v2.1.1] - 2022-11-05
+### Changed
+- Configure action to use NodeJS v16 instead of v12.
+  [Reason](https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/)
+
 ## [v2.1.0] - 2021-02-09
 ### Added
 - Add `global` option to configure global git user, name and password.
