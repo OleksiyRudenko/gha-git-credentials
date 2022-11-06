@@ -10,7 +10,7 @@
     "set-version-tags": "set_tags.sh",
     "generate-toc": "doctoc --github README.md CONTRIBUTING.md",
     "dependents-discovery-install": "pip install ghtopdep",
-    "dependents-discovery-list": "@echo NB! public_repo token is required && ghtopdep https://github.com/OleksiyRudenko/gha-git-credentials --description --token"
+    "dependents-discovery-list": "@echo NB! public_repo token is required && ghtopdep https://github.com/OleksiyRudenko/gha-git-credentials --token"
   },
   "repository": {
     "type": "git",
