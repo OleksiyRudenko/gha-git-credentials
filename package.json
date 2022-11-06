@@ -7,6 +7,8 @@
     "pull": "git pull && git fetch origin --tags --force",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ncc build index.js -o dist && cp ./action.sh dist",
+    "set-version-tags": "set_tags.sh",
+    "generate-toc": "doctoc --github README.md CONTRIBUTING.md",
     "dependents-discovery-install": "pip install ghtopdep",
     "dependents-discovery-list": "@echo NB! public_repo token is required && ghtopdep https://github.com/OleksiyRudenko/gha-git-credentials --description --token"
   },
