@@ -36,9 +36,11 @@ jobs:
         uses: oleksiyrudenko/gha-git-credentials@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Commit update
+      - name: Commit update and tag with rc (forcedly)
         run: |
           git commit -m "Update dist/*" -a
+          git tag -f rc
       - name: Publish changes
         run: |
           git push
+          git push -f origin rc
