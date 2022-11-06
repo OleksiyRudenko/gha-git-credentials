@@ -125,7 +125,8 @@ or [confirm that no issues are detected](https://github.com/OleksiyRudenko/gha-g
 - Trigger test at [gha-git-credentials-test](https://github.com/OleksiyRudenko/gha-git-credentials-test)
 - Check [kottans/frontend-2022-homeworks actions log](https://github.com/kottans/frontend-2022-homeworks/actions).
   See recent daily `Update students' PR stats` workflow run. 
-  It uses the `rc` version of the action. Make workflow run timing is appropriate.
+  It uses the `rc` version of the action.
+  Make sure that reviewed workflow run time is relevant to the tested RC version.
 - Run other tests as appropriate.
 
 ### 4. Tag new release
