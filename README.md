@@ -153,7 +153,7 @@ extra tags would work as follows:
   (the latest release within `v2` scope). 
   Currently `v2` points at `v2.0.0` serving as a shorthand
   for the full semantic notation.
-- `v2.1` points at the same commit `v2.1.3`
+- `v2.1` points at the same commit `v2.1.3` does
   (the latest release within `v2.1` scope).
   Currently `v2.1` points exactly at `v2.1.0` serving as a shorthand
   for the full semantic notation.
