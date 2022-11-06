@@ -16,6 +16,12 @@ in all your interactions with the project.
 - [Testing](#testing)
 - [Pull Request Process](#pull-request-process)
 - [Release process](#release-process)
+  - [1. Publish code changes](#1-publish-code-changes)
+  - [2. Advertise release candidate](#2-advertise-release-candidate)
+  - [3. Test the release candidate](#3-test-the-release-candidate)
+  - [4. Tag new release](#4-tag-new-release)
+  - [5. Update docs](#5-update-docs)
+  - [6. Publish release](#6-publish-release)
 - [Code of Conduct](#code-of-conduct)
   - [Our Pledge](#our-pledge)
   - [Our Standards](#our-standards)
@@ -86,20 +92,59 @@ the PR is approved and merged.
 
 ## Release process
 
-This action deployment workflow uses itself to build its own distribution package.
+1. Publish code changes
+2. Advertise release candidate
+3. Test release candidate
+4. Tag new release
+5. Update docs
+6. Publish release
+
+### 1. Publish code changes
+
+This action deployment workflow uses itself to
+build its own distribution package.
 
 Deployment action is triggered once a commit introducing a change to
-the either of files specified under `on` clause
+either of the files specified under `on` clause
 in [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)
 is pushed to `master` branch on GitHub.
 
-The action creates a distribution package, commits and pushes the change.
+The action creates a distribution package, commits,
+sets (forcedly) `rc` (Release Candidate) tag and
+pushes the change.
 
-Once this happens:
-- tag the commit with a version, following SemVer convention
-- move relevant `vX-latest` to that commit if there is no breaking change
-- create `vX-latest` if the major version changes
-- [create and publish a release](https://github.com/OleksiyRudenko/gha-git-credentials/releases)
+### 2. Advertise release candidate
+
+Invite maintainers, contributors and key users
+to test the Release Candidate and
+[report any bugs](https://github.com/OleksiyRudenko/gha-git-credentials/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+Short+bug+description)
+or [confirm that no issues are detected](https://github.com/OleksiyRudenko/gha-git-credentials/issues/new?assignees=&labels=rc-test-ok&template=release-candidate-test-ok.md&title=%5BRC%5D+Release+Candidate+test+-+OK).
+
+### 3. Test the release candidate
+
+- Trigger test at [gha-git-credentials-test](https://github.com/OleksiyRudenko/gha-git-credentials-test)
+- Check [kottans/frontend-2022-homeworks actions log](https://github.com/kottans/frontend-2022-homeworks/actions).
+  See recent daily `Update students' PR stats` workflow run. 
+  It uses the `rc` version of the action. Make workflow run timing is appropriate.
+- Run other tests as appropriate.
+
+### 4. Tag new release
+
+- Pull the latest changes from the remote
+- Run `npm set-version-tags X Y Z` to set `vX.Y.Z`, `vX.Y-latest`,
+  `vX-latest`, and `latest` tags 
+
+### 5. Update docs
+
+- `README.md` sections: Inputs, Outputs, Usage Example, Versions
+- [`CHANGELOG.md`](./CHANGELOG.md)
+- [`package.json/version`](./package.json)
+- run `npm run generate-toc`
+
+### 6. Publish release
+
+[Create and publish a release](https://github.com/OleksiyRudenko/gha-git-credentials/releases)
+publishing this Action to the GitHub Marketplace.
 
 ## Code of Conduct
 

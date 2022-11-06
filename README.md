@@ -1,4 +1,4 @@
-# Git Credentials
+# Git Credentials for GitHub workflows
 
 [GitHub Action](https://github.com/features/actions) for setting up
 git credentials.
@@ -19,7 +19,7 @@ for pushing to repositories other than the repo the workflow is triggered for.
 Pushing to the current repository should work
 with the always-available GitHub Token `{{ secrets.GITHUB_TOKEN }}`.
 
-You may also want to override default git user name and email.
+You may also want to override default git username and email.
 
 Actor would also be overridden when pushing to a repo cloud other than GitHub.
 
@@ -47,13 +47,13 @@ This project deployment workflow uses very this action to build its own distribu
 
 ## Inputs
 
-| property name | value type | default value | description |
-| ---           | ---        | ---           | ---         |
-| `global`      | boolean    | false         | global git config used to assign git user name, email and password when true |
-| `name`        | string     | `GitHub Action` | value for git config user.name |
-| `email`       | string     | `github-action@users.noreply.github.com` | value for git config user.email |
-| `actor`       | string     | github.actor  | value used to construct GIT_USER |
-| `token`       | string     | **n/a**       | **required** value for git user.password and GIT_USER |
+| property name | value type | default value                              | description                                                                  |
+|---------------|------------|--------------------------------------------|------------------------------------------------------------------------------|
+| `global`      | boolean    | `false`                                    | global git config used to assign git user name, email and password when true |
+| `name`        | string     | `"GitHub Action"`                          | value for `git config user.name`                                             |
+| `email`       | string     | `"github-action@users.noreply.github.com"` | value for `git config user.email`                                            |
+| `actor`       | string     | `github.actor`                             | value used to construct `GIT_USER`                                           |
+| `token`       | string     | **n/a**, explicit value required           | **required** value for `git user.password` and `GIT_USER`                    |
 
 The minimally required action configuration requires a token being explicitly specified.
 Example below uses secrets.GITHUB_TOKEN available to the workflow as a token source.
@@ -126,7 +126,9 @@ So, in this action the options are:
 - `vX-latest` - latest release within the major version
   (no breaking changes, backward compatibility)
 - `latest` - latest release, major version change may occur
-- `<branch-name>` - version as per given branch name, useful for testing 
+- `<branch-name>` - version as per given branch name, useful for testing
+- `rc` - release candidate. Used for pre-prod testing within
+  the [release process](./CONTRIBUTING.md#release-process).
 
 Whenever non-breaking changes introduced, having backward compatibility secured,
 a patch version is released and the relevant `vX-latest` tag is moved to point
@@ -134,8 +136,34 @@ at the latest release within current major version.
 
 Using `vX-latest` is a recommended choice.
 
-Below are key features of the releases.
-Check [CHANGELOG](./CHANGELOG.md) for details. 
+Below are the key features of the releases.
+Check [CHANGELOG](./CHANGELOG.md) for details.
+
+<details><summary>Notes on version tagging</summary>
+
+**Q: What I would do differently?**
+
+A: I would tag every single release with a full
+semantic version notation
+(i.e. `vX.Y.Z`, e.g. `v2.0.0`, `v2.0.1`, `v2.1.0`, `v2.1.3`, `v2.2.5` etc).
+
+Then, taking the above examples into consideration,
+extra tags would work as follows:
+- `v2` points at the same commit `v2.2.5` does 
+  (the latest release within `v2` scope). 
+  Currently `v2` points at `v2.0.0` serving as a shorthand
+  for the full semantic notation.
+- `v2.1` points at the same commit `v2.1.3`
+  (the latest release within `v2.1` scope).
+  Currently `v2.1` points exactly at `v2.1.0` serving as a shorthand
+  for the full semantic notation.
+
+**Q: Why not change the approach now?**
+
+A: Current [action users](#action-users) may rely 
+on current tagging approach. Changing version handling
+and tagging approach may break their workflows
+</details>
 
 ### v2.1.1
 
@@ -160,27 +188,22 @@ Features:
 
 ## Action Users
 
-As of July 25, 2022, [685 projects on GitHub depend on this GitHub action](https://github.com/OleksiyRudenko/gha-git-credentials/network/dependents).
+As of November 06, 2022, [762 projects on GitHub depend on this GitHub action](https://github.com/OleksiyRudenko/gha-git-credentials/network/dependents).
 
-**15 top rated**
+**10 top rated**
 
-| url                                                        |   stars |
-|------------------------------------------------------------|--------:|
-| https://github.com/yewstack/yew                            |     23K |
-| https://github.com/lingui/js-lingui                        |    3.4K |
-| https://github.com/ibis-project/ibis                       |    1.9K |
-| https://github.com/wickedest/Mergely                       |    1.0K |
-| https://github.com/CuyZ/Valinor                            |     584 |
-| https://github.com/snowplow/snowplow-javascript-tracker    |     487 |
-| https://github.com/themoonisacheese/2bored2wait            |     341 |
-| https://github.com/Lightning-AI/tutorials                  |     152 |
-| https://github.com/diegoazh/gmap-vue                       |     133 |
-| https://github.com/cookiejar/cookietemple                  |     123 |
-| https://github.com/jessedobbelaere/tailwindcss-sketch-kit  |     117 |
-| https://github.com/zeromq/pyre                             |     113 |
-| https://github.com/splunk/splunk-connect-for-syslog        |     100 |
-| https://github.com/QuiltServerTools/Ledger                 |      96 |
-| https://github.com/JustLiquidity/DEFAULT-TOKEN-LIST        |      85 |
+| url                                                     | stars   |
+|---------------------------------------------------------|---------|
+| https://github.com/yewstack/yew                         | 25K     |
+| https://github.com/lingui/js-lingui                     | 3.5K    |
+| https://github.com/wickedest/Mergely                    | 1.0K    |
+| https://github.com/CuyZ/Valinor                         | 725     |
+| https://github.com/snowplow/snowplow-javascript-tracker | 495     |
+| https://github.com/themoonisacheese/2bored2wait         | 368     |
+| https://github.com/Lightning-AI/tutorials               | 171     |
+| https://github.com/diegoazh/gmap-vue                    | 140     |
+| https://github.com/Umkus/ip-index                       | 134     |
+| https://github.com/cookiejar/cookietemple               | 128     |
 
 _Stats built with [ghtopdep](https://github.com/github-tooling/ghtopdep)_
 
