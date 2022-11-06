@@ -1,11 +1,14 @@
 {
   "name": "gha-git-credentials",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A GitHub action for setting up git credentials",
   "main": "index.js",
   "scripts": {
+    "pull": "git pull && git fetch origin --tags --force",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build index.js -o dist && cp ./action.sh dist"
+    "build": "ncc build index.js -o dist && cp ./action.sh dist",
+    "dependents-discovery-install": "pip install ghtopdep",
+    "dependents-discovery-list": "@echo NB! public_repo token is required && ghtopdep https://github.com/OleksiyRudenko/gha-git-credentials --description --token"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,7 @@
     "url": "https://github.com/OleksiyRudenko/gha-git-credentials/issues"
   },
   "homepage": "https://github.com/OleksiyRudenko/gha-git-credentials#readme",
-  "devDependencies": {
-    "@zeit/ncc": "0.21.1"
+  "dependencies": {
+    "@vercel/ncc": "^0.34.0"
   }
 }
