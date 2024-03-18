@@ -19,9 +19,8 @@ inputs:
     required: false
     default: 'GitHub Action'
   actor:
-    description: 'GitHub Actor Username (default: github.actor)'
+    description: 'GitHub Actor Username (default: `$GITHUB_ACTOR`)'
     required: false
-    default: GITHUB_ACTOR
   token:
     description: 'GitHub Token'
     required: true
